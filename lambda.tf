@@ -53,7 +53,7 @@ resource "aws_iam_role" "lambda_exec" {
 EOF
 
 }
-
+ 
 
 resource "aws_lambda_permission" "apigw" {
    statement_id  = "AllowAPIGatewayInvoke"
