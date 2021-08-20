@@ -54,7 +54,7 @@ resource "aws_api_gateway_deployment" "example" {
   rest_api_id = aws_api_gateway_rest_api.example.id
   #stage_name  = var.code_version
   # remote state 사용을 위해 아래와 같이 변강
-  stage_name = data.terraform_remote_state.lambda-demo.outputs.code_version
+  stage_name = data.terraform_remote_state.lambda_demo.outputs.code_version
 
   lifecycle {
     create_before_destroy = true

@@ -1,11 +1,11 @@
 # Run Trigger 적용 시, Source Workspace상의 output을 활용하기 위하여 추가
-data "terraform_remote_state" "lambda-demo" {
+data "terraform_remote_state" "lambda_demo" {
   backend = "remote"
 
   config = {
     organization = "lkcdevteam"
     workspaces = {
-      name = "lambda-demo"
+      name = "lambda_demo"
     }
   }
 }
@@ -20,7 +20,7 @@ resource "aws_lambda_function" "example" {
    s3_bucket = "jsp-lambda-code-bucket"
    #s3_key    = "v${var.code_version}/example.zip"
    # Remote state 사용을 위해 아래와 같이 수정
-   s3_key    = "v${data.terraform_remote_state.lambda-demo.outputs.code_version}/example.zip"
+   s3_key    = "v${data.terraform_remote_state.lambda_demo.outputs.code_version}/example.zip"
 
    # "main" is the filename within the zip file (main.js) and "handler"
    # is the name of the property under which the handler function was
