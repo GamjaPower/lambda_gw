@@ -1,11 +1,11 @@
 # Run Trigger 적용 시, Source Workspace상의 output을 활용하기 위하여 추가
-data "terraform_remote_state" "lambda-demo" {
+data "terraform_remote_state" "lambda-gw" {
   backend = "remote"
 
   config = {
     organization = "lkcdevteam"
     workspaces = {
-      name = "lambda-demo"
+      name = "lambda-gw"
     }
   }
 }
