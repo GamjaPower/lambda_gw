@@ -3,7 +3,7 @@ data "terraform_remote_state" "lambda-demo" {
   backend = "remote"
 
   config = {
-    organization = "snapshot_tf_serverless"
+    organization = "lkcdevteam"
     workspaces = {
       name = "lambda-demo"
     }
