@@ -1,11 +1,11 @@
 # Run Trigger 적용 시, Source Workspace상의 output을 활용하기 위하여 추가
-data "terraform_remote_state" "lambda-gw" {
+data "terraform_remote_state" "lambda-demo" {
   backend = "remote"
 
   config = {
-    organization = "lkcdevteam"
+    organization = "snapshot_tf_serverless"
     workspaces = {
-      name = "lambda-gw"
+      name = "lambda-demo"
     }
   }
 }
@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_lambda_function" "example" {
    function_name = "ServerlessExample"
    # The bucket name as created earlier with "aws s3api create-bucket"
-   s3_bucket = "lambda-demo-code-bucket"
+   s3_bucket = "jsp-lambda-code-bucket"
    #s3_key    = "v${var.code_version}/example.zip"
    # Remote state 사용을 위해 아래와 같이 수정
    s3_key    = "v${data.terraform_remote_state.lambda-demo.outputs.code_version}/example.zip"
@@ -53,7 +53,7 @@ resource "aws_iam_role" "lambda_exec" {
 EOF
 
 }
- 
+
 
 resource "aws_lambda_permission" "apigw" {
    statement_id  = "AllowAPIGatewayInvoke"
